@@ -1,3 +1,9 @@
+hjemmenett-battery-status (0.2) UNRELEASED; urgency=low
+
+  * Add timestamp string to csv header.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 15 Aug 2013 21:04:50 +0200
+
 hjemmenett-battery-status (0.1) wheezy; urgency=low
 
   * Initial version.

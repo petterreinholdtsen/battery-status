@@ -9,6 +9,7 @@ files="manufacturer model_name technology serial_number \
 
 if [ ! -e "$logfile" ] ; then
     (
+	printf "timestamp,"
 	for f in $files; do
 	    printf "%s," $f
 	done
