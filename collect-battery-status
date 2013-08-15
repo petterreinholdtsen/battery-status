@@ -1,0 +1,31 @@
+#!/bin/sh
+# Inspired by
+# http://www.ifweassume.com/2013/08/the-de-evolution-of-my-laptop-battery.html
+
+logfile=/var/log/hjemmenett-battery-status.log
+
+files="manufacturer model_name technology serial_number \
+    energy_full energy_full_design energy_now cycle_count"
+
+if [ ! -e "$logfile" ] ; then
+    (
+	for f in $files; do
+	    printf "%s," $f
+	done
+	echo
+    ) > "$logfile"
+fi
+
+log_battery() {
+    printf "%s," $(date +%s)
+    for f in $files; do
+	printf "%s," $(cat $f)
+    done
+    echo
+}
+
+cd /sys/class/power_supply
+
+for bat in BAT*; do
+    (cd $bat && log_battery >> "$logfile")
+done

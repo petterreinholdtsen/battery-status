@@ -1,0 +1,5 @@
+hjemmenett-battery-status (0.1) wheezy; urgency=low
+
+  * Initial version.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 15 Aug 2013 20:56:48 +0200
