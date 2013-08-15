@@ -5,7 +5,7 @@
 logfile=/var/log/hjemmenett-battery-status.log
 
 files="manufacturer model_name technology serial_number \
-    energy_full energy_full_design energy_now cycle_count"
+    energy_full energy_full_design energy_now cycle_count status"
 
 if [ ! -e "$logfile" ] ; then
     (
