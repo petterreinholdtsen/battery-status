@@ -1,3 +1,9 @@
+hjemmenett-battery-status (0.4) UNRELEASED; urgency=low
+
+  * Increase collecting frequency from every 15th to every 10th minute.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 Aug 2013 14:52:34 +0200
+
 hjemmenett-battery-status (0.3) wheezy; urgency=low
 
   * Add power management action script to collect battery status
