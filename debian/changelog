@@ -1,8 +1,8 @@
-hjemmenett-battery-status (0.4) UNRELEASED; urgency=low
+hjemmenett-battery-status (0.4) wheezy; urgency=low
 
   * Increase collecting frequency from every 15th to every 10th minute.
 
- -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 Aug 2013 14:52:34 +0200
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 Aug 2013 15:36:27 +0200
 
 hjemmenett-battery-status (0.3) wheezy; urgency=low
 
