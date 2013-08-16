@@ -1,7 +1,8 @@
 hjemmenett-battery-status (0.3) UNRELEASED; urgency=low
 
-  * Add power management action script to collect battery status before
-    and after hibernation.
+  * Add power management action script to collect battery status
+    before and after hibernation, as well as when power is connected
+    or disconnected.
 
  -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 Aug 2013 14:07:22 +0200
 
