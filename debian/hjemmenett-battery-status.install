@@ -1,1 +1,2 @@
 collect-battery-status usr/sbin
+etc-pm-sleep.d/20_hjemmenett-battery-status etc/pm/power.d

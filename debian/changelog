@@ -1,3 +1,10 @@
+hjemmenett-battery-status (0.3) UNRELEASED; urgency=low
+
+  * Add power management action script to collect battery status before
+    and after hibernation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 Aug 2013 14:07:22 +0200
+
 hjemmenett-battery-status (0.2) wheezy; urgency=low
 
   * Add timestamp string to csv header.
