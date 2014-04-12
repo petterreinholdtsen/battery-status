@@ -1,3 +1,9 @@
+hjemmenett-battery-status (0.5) UNRELEASED; urgency=low
+
+  * Correct comment (15->10 minutes) in cron job.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2014 23:07:05 +0200
+
 hjemmenett-battery-status (0.4) wheezy; urgency=low
 
   * Increase collecting frequency from every 15th to every 10th minute.
