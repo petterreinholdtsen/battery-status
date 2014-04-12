@@ -1,7 +1,8 @@
 #!/bin/sh
 # Inspired by
 # http://www.ifweassume.com/2013/08/the-de-evolution-of-my-laptop-battery.html
-
+# See also
+# http://blog.sleeplessbeastie.eu/2013/01/02/debian-how-to-monitor-battery-capacity/
 logfile=/var/log/hjemmenett-battery-status.log
 
 files="manufacturer model_name technology serial_number \
