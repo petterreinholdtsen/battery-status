@@ -6,7 +6,11 @@
 logfile=/var/log/hjemmenett-battery-status.log
 
 files="manufacturer model_name technology serial_number \
-    energy_full energy_full_design energy_now cycle_count status"
+    energy_full/charge_full \
+    energy_full_design/charge_full_design \
+    charge_now/energy_now \
+    cycle_count \
+    status"
 
 if [ ! -e "$logfile" ] ; then
     (
@@ -23,7 +27,14 @@ log_battery() {
     # when several log processes run in parallel.
     msg=$(printf "%s," $(date +%s); \
 	for f in $files; do \
-	    printf "%s," $(cat $f); \
+	    for file in $(echo $f | tr / " "); do
+	        if [ -e $file ] ; then fexist=$file; fi ; \
+	    done ; \
+	    if [ -e "$fexist" ] ; then \
+		printf "%s," $(cat $fexist); \
+	    else \
+		printf "," ; \
+	    fi \
 	done)
     echo "$msg"
 }

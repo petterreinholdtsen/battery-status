@@ -1,3 +1,10 @@
+hjemmenett-battery-status (0.6) UNRELEASED; urgency=medium
+
+  * Rewrite battery-status-collect to handle Dell batteries too, where
+    energy_* do not exist, while charge_* is used.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 24 Sep 2015 21:28:25 +0200
+
 hjemmenett-battery-status (0.5) jessie; urgency=low
 
   * Correct comment (15->10 minutes) in cron job.
