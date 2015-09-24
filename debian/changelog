@@ -1,4 +1,4 @@
-hjemmenett-battery-status (0.5) UNRELEASED; urgency=low
+hjemmenett-battery-status (0.5) jessie; urgency=low
 
   * Correct comment (15->10 minutes) in cron job.
   * Rewrite collect-battery-status to not log line fragments, to
@@ -10,7 +10,7 @@ hjemmenett-battery-status (0.5) UNRELEASED; urgency=low
   * Update package description to reflect current status.
   * Update packaging to debhelper 9 etc.
 
- -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2014 23:07:05 +0200
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 24 Sep 2015 12:27:42 +0200
 
 hjemmenett-battery-status (0.4) wheezy; urgency=low
 
