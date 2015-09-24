@@ -1,0 +1,9 @@
+Battery-status
+==============
+
+Battery status collector for Debian based systems.
+
+The latest version is available from
+<URL: https://github.com/petterreinholdtsen/battery-status >
+
+ - Petter Reinholdtsen
