@@ -1,9 +1,11 @@
-hjemmenett-battery-status (0.6) UNRELEASED; urgency=medium
+hjemmenett-battery-status (0.6) jessie; urgency=low
 
+  * Add simple README.
+  * Improve graph title and include battery details.
   * Rewrite battery-status-collect to handle Dell batteries too, where
     energy_* do not exist, while charge_* is used.
 
- -- Petter Reinholdtsen <pere@debian.org>  Thu, 24 Sep 2015 21:28:25 +0200
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 24 Sep 2015 21:48:43 +0200
 
 hjemmenett-battery-status (0.5) jessie; urgency=low
 
