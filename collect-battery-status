@@ -19,11 +19,13 @@ if [ ! -e "$logfile" ] ; then
 fi
 
 log_battery() {
-    printf "%s," $(date +%s)
-    for f in $files; do
-	printf "%s," $(cat $f)
-    done
-    echo
+    # Print complete message in one echo call, to avoid race condition
+    # when several log processes run in parallell.
+    msg=$(printf "%s," $(date +%s); \
+	for f in $files; do \
+	    printf "%s," $(cat $f); \
+	done)
+    echo "$msg"
 }
 
 cd /sys/class/power_supply
