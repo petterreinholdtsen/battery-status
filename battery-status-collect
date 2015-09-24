@@ -20,7 +20,7 @@ fi
 
 log_battery() {
     # Print complete message in one echo call, to avoid race condition
-    # when several log processes run in parallell.
+    # when several log processes run in parallel.
     msg=$(printf "%s," $(date +%s); \
 	for f in $files; do \
 	    printf "%s," $(cat $f); \
