@@ -5,6 +5,8 @@ hjemmenett-battery-status (0.5) UNRELEASED; urgency=low
     reduce the chance for a race condition.
   * Add new script battery-status-graph using gnuplut to draw a graph
     of the collected battery status.
+  * Rename the collect-battery-status script to battery-status-collect,
+    to have the same prefix on all programs included in binary package.
 
  -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2014 23:07:05 +0200
 

@@ -10,8 +10,8 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
 case "${1}" in
     hibernate|suspend|resume|thaw)
-	if [ -x /usr/sbin/collect-battery-status ]; then
-	    /usr/sbin/collect-battery-status
+	if [ -x /usr/sbin/battery-status-collect ]; then
+	    /usr/sbin/battery-status-collect
 	fi
         ;;
 esac
