@@ -7,6 +7,8 @@ hjemmenett-battery-status (0.5) UNRELEASED; urgency=low
     of the collected battery status.
   * Rename the collect-battery-status script to battery-status-collect,
     to have the same prefix on all programs included in binary package.
+  * Update package description to reflect current status.
+  * Update packaging to debhelper 9 etc.
 
  -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2014 23:07:05 +0200
 
