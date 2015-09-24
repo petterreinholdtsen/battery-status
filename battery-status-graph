@@ -8,7 +8,7 @@ filename=battery-graph.png
     echo set timefmt \"%s\"
     echo set format x \"%Y\"
     echo set datafile separator \",\"
-    echo set title \'ACPI Battery Graph\'
+    echo set title \'Battery statistics\'
     echo set ylabel \'Percent\'
     echo set xlabel \'Year\'
     echo set grid
