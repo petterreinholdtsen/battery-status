@@ -8,5 +8,6 @@ Standards-Version: 3.9.4
 Package: hjemmenett-battery-status
 Architecture: all
 Depends: ${misc:Depends}
+ , gnuplot
 Description: Collect battery status
  Gather info every 15 minutes.
