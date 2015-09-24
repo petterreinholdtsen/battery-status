@@ -3,12 +3,15 @@
 input=/var/log/hjemmenett-battery-status.log
 filename=battery-graph.png
 
+# manufacturer,model_name,technology
+type=$(head -2 "$input" | tail -1 | cut -d, -f2-4 | tr , " ")
+
 (
     echo set xdata time
     echo set timefmt \"%s\"
     echo set format x \"%Y\"
     echo set datafile separator \",\"
-    echo set title \'Battery statistics\'
+    echo set title \'Battery statistics $type\'
     echo set ylabel \'Percent\'
     echo set xlabel \'Year\'
     echo set grid
