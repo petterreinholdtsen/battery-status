@@ -1,4 +1,20 @@
-hjemmenett-battery-status (0.6) jessie; urgency=low
+hjemmenett-battery-status (0.7) wheezy; urgency=low
+
+  [ Antoine Beaupré ]
+  * Fix typo in graph labels.
+  * Display to x11 by default, allow filename on the command line.
+  * Move gnuplot to recommends, as the collection work fine without it.
+
+  [ Petter Reinholdtsen ]
+  * Make it clear that this package is GPL v2+.
+  * Reinsert the printing of the generated file name at the end
+    of battery-status-graph.
+  * Make level line in the graph thiner.
+  * Recommend qt and x11 gnuplot for the default graph drawing.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 25 Sep 2015 09:28:03 +0200
+
+hjemmenett-battery-status (0.6) wheezy; urgency=low
 
   * Add simple README.
   * Improve graph title and include battery details.
