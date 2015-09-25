@@ -24,24 +24,23 @@ if [ ! -e "$logfile" ] ; then
 fi
 
 log_battery() {
-    # Print complete message in one echo call, to avoid race condition
-    # when several log processes run in parallel.
-    msg=$(printf "%s," $(date +%s); \
-	for f in $files; do \
-	    for file in $(echo $f | tr / " "); do
-	        if [ -e $file ] ; then fexist=$file; fi ; \
-	    done ; \
-	    if [ -e "$fexist" ] ; then \
-		printf "%s," $(cat $fexist); \
-	    else \
-		printf "," ; \
-	    fi \
-	done)
-    echo "$msg"
+    printf "%s," $(date +%s)
+    for f in $files; do 
+	for file in $(echo $f | tr / " "); do
+	    if [ -e $file ] ; then fexist=$file; fi
+	done
+	if [ -e "$fexist" ] ; then
+	    printf "%s," $(cat $fexist)
+	else
+	    printf ","
+	fi
+    done
 }
 
 cd /sys/class/power_supply
 
 for bat in BAT*; do
-    (cd $bat && log_battery >> "$logfile")
+    # Print complete message in one echo call, to avoid race condition
+    # when several log processes run in parallel.
+    (cd $bat && echo $(log_battery)) >> "$logfile"
 done
