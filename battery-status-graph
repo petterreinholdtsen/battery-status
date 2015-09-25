@@ -2,7 +2,7 @@
 # License: GNU Public License v2 or later at your choice.
 
 input=/var/log/hjemmenett-battery-status.log
-filename=battery-graph.png
+filename=${1}
 
 # manufacturer,model_name,technology
 type=$(head -2 "$input" | tail -1 | cut -d, -f2-4 | tr , " ")
@@ -16,9 +16,10 @@ type=$(head -2 "$input" | tail -1 | cut -d, -f2-4 | tr , " ")
     echo set ylabel \'Percent\'
     echo set xlabel \'Year\'
     echo set grid
-    echo set term png
-    echo set output \"$filename\"
-    echo plot "\"$input\" using 1:(100 * \$8 / \$7) smooth unique axis x1y1 title \"Battery level %\" with lines linewidth 1 linecolor rgb 'grey',\"$input\" using 1:(100 * \$6 / \$7) smooth unique axis x1y1 title \"Battery full capasity %\" with lines linewidth 1 linecolor rgb 'red',\"$input\" using 1:(100 * \$7 / \$7) smooth unique axis x1y1 title \"Battery design capasity %\" with lines linewidth 1 linecolor rgb 'black'"
+    if [ "$filename" != "" ]; then
+        echo set term png
+        echo set output \"$filename\"
+    fi
+    echo plot "\"$input\" using 1:(100 * \$8 / \$7) smooth unique axis x1y1 title \"Battery level %\" with lines linewidth 1 linecolor rgb 'grey',\"$input\" using 1:(100 * \$6 / \$7) smooth unique axis x1y1 title \"Battery full capacity %\" with lines linewidth 1 linecolor rgb 'red',\"$input\" using 1:(100 * \$7 / \$7) smooth unique axis x1y1 title \"Battery design capacity %\" with lines linewidth 1 linecolor rgb 'black'"
 
-) | gnuplot
-echo "PNG graph $filename created."
+) | gnuplot -p
