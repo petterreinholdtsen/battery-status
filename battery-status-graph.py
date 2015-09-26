@@ -104,7 +104,7 @@ def render_graph():
         logging.info("drawing on tty")
         plt.show()
     else:
-        logging.info('writing to file %s', args.outfile)
+        logging.info('drawing to file %s', args.outfile)
         plt.savefig(args.outfile, bbox_inches='tight')
 
 if __name__ == "__main__":
