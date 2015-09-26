@@ -17,8 +17,8 @@ parser.add_argument('logfile', nargs='?', type=argparse.FileType('r'),
 parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'),
                     default=sys.stdout,
                     help='image to write (default to terminal if available, otherwise stdout)')
-parser.add_argument('--death', type=int, default=0,
-                    help='percentage of battery when it is considered dead')
+parser.add_argument('--death', type=int, default=5,
+                    help='percentage of battery when it is considered dead (default: %(default)s)')
 args = parser.parse_args()
 
 def parse_csv_np():
