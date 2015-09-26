@@ -8,8 +8,10 @@ import sys
 import time
 import datetime
 
+logfile = '/var/log/hjemmenett-battery-status.log'
+
 def parse_csv_np():
-    data = np.genfromtxt('/var/log/hjemmenett-battery-status.log',
+    data = np.genfromtxt(logfile,
                          delimiter=',', names=True,
                          filling_values = 0.0)
     # convert timestamp to datetime, but also select only relevant
