@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+import logging
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -98,12 +99,14 @@ def build_graph(data):
     
 def render_graph():
     if sys.stdout.isatty() and args.outfile == sys.stdout:
-        print "drawing on tty"
+        logging.info("drawing on tty")
         plt.show()
     else:
+        logging.info('writing to file %s', args.outfile)
         plt.savefig(args.outfile, bbox_inches='tight')
 
 if __name__ == "__main__":
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
     data = parse_csv()
     build_graph(data)
     render_graph()
