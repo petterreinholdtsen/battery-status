@@ -32,6 +32,15 @@ def parse_csv_np():
     #                    ('energy_now', 'f')])
     return data
 
+def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energy_now']):
+    import csv
+    log = csv.DictReader(args.logfile)
+    data = []
+    for row in log:
+        l = tuple([ row[f] for f in fields ])
+        data.append(l)
+    return np.array(data, dtype=zip(fields, 'f'*len(fields)))
+
 def to_percent(y, position):
     # Ignore the passed in position. This has the effect of scaling
     # the default tick locations.
@@ -44,7 +53,7 @@ def to_percent(y, position):
         return s + '%'
 
 def plot():
-    data = parse_csv_np()
+    data = parse_csv()
     # create vectorized converter (can take list-like objects as
     # arguments)
     dateconv = np.vectorize(datetime.datetime.fromtimestamp)
