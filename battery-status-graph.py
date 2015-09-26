@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import argparse
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -8,10 +9,17 @@ import sys
 import time
 import datetime
 
-logfile = '/var/log/hjemmenett-battery-status.log'
+parser = argparse.ArgumentParser()
+parser.add_argument('logfile', nargs='?', type=argparse.FileType('r'),
+                    default=sys.stdin,
+                    help='logfile to read (default: stdin)')
+parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'),
+                    default=sys.stdout,
+                    help='image to write (default to terminal if available, otherwise stdout)')
+args = parser.parse_args()
 
 def parse_csv_np():
-    data = np.genfromtxt(logfile,
+    data = np.genfromtxt(args.logfile,
                          delimiter=',', names=True,
                          filling_values = 0.0)
     # convert timestamp to datetime, but also select only relevant
@@ -79,12 +87,10 @@ def plot():
     # Set the formatter
     ax.yaxis.set_major_formatter(formatter)
 
-    if sys.stdout.isatty():
+    if sys.stdout.isatty() and args.outfile == sys.stdout:
         print "drawing on tty"
         plt.show()
     else:
-        image = 'battery-graph.png'
-        print "writing to image %s" % image
-        plt.savefig(image, bbox_inches='tight')
+        plt.savefig(args.outfile, bbox_inches='tight')
 
 plot()
