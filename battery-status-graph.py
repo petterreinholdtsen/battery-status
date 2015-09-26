@@ -69,7 +69,7 @@ def build_graph(data):
              label='design')
     ax.plot(dates, data['energy_now'] / data['energy_full_design'],
              linestyle = '-',
-            linewidth = 0.5,
+             linewidth = 0.1,
              color='grey',
              label='current')
     ax.plot(dates, data['energy_full'] / data['energy_full_design'],
