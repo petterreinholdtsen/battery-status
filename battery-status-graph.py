@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as md
+from matplotlib.ticker import FuncFormatter
 import pylab
 import time
 import datetime
@@ -22,6 +23,17 @@ def parse_csv_np():
     #                    ('energy_now', 'f')])
     return data
 
+def to_percent(y, position):
+    # Ignore the passed in position. This has the effect of scaling the default
+    # tick locations.
+    s = str(100 * y)
+
+    # The percent symbol needs escaping in latex
+    if matplotlib.rcParams['text.usetex'] == True:
+        return s + r'$\%$'
+    else:
+        return s + '%'
+
 def plot():
     data = parse_csv_np()
     # create vectorized converter (can take list-like objects as arguments)
@@ -30,9 +42,15 @@ def plot():
     # XXX: can't seem to plot all at once...
     #plt.plot(dates, data['energy_now'], '-b', data['energy_full'], '-r')
     # ... but once at a time seems to do the result i am looking for
-    plt.plot(dates, data['energy_full_design'] , '-k')
-    plt.plot(dates, data['energy_now'], '-b')
-    plt.plot(dates, data['energy_full'], '-r')
+    plt.plot(dates, data['energy_full_design'] / data['energy_full_design'] , '-k')
+    plt.plot(dates, data['energy_now']  / data['energy_full_design'], '-b')
+    plt.plot(dates, data['energy_full'] / data['energy_full_design'], '-r')
+    # Create the formatter using the function to_percent. This multiplies all the
+    # dfault labels by 100, making them all percentages
+    formatter = FuncFormatter(to_percent)
+
+    # Set the formatter
+    plt.gca().yaxis.set_major_formatter(formatter)
     plt.show()
 
 plot()
