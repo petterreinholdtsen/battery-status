@@ -39,12 +39,21 @@ def plot():
     # create vectorized converter (can take list-like objects as arguments)
     dateconv = np.vectorize(datetime.datetime.fromtimestamp)
     dates = dateconv(data['timestamp'])
+
+    fig, ax = plt.subplots()
+
     # XXX: can't seem to plot all at once...
     #plt.plot(dates, data['energy_now'], '-b', data['energy_full'], '-r')
     # ... but once at a time seems to do the result i am looking for
     plt.plot(dates, data['energy_full_design'] / data['energy_full_design'] , '-k')
     plt.plot(dates, data['energy_now']  / data['energy_full_design'], '-b')
     plt.plot(dates, data['energy_full'] / data['energy_full_design'], '-r')
+
+    # Tell matplotlib to interpret the x-axis values as dates
+    ax.xaxis_date()
+    # Make space for and rotate the x-axis tick labels
+    fig.autofmt_xdate()
+
     # Create the formatter using the function to_percent. This multiplies all the
     # dfault labels by 100, making them all percentages
     formatter = FuncFormatter(to_percent)
