@@ -48,14 +48,16 @@ def plot():
     #plt.plot(dates, data['energy_now'], '-b', data['energy_full'], '-r')
     # ... but once at a time seems to do the result i am looking for
     plt.plot(dates, data['energy_full_design'] / data['energy_full_design'],
-             '-',
+             linestyle = '-',
+             color = 'black',
              label='design')
     plt.plot(dates, data['energy_now'] / data['energy_full_design'],
-             '-',
+             linestyle = '-',
              color='grey',
              label='current')
     plt.plot(dates, data['energy_full'] / data['energy_full_design'],
-             '-r',
+             linestyle = '-',
+             color = 'red',
              label='effective')
     plt.legend(loc='lower left')
 
