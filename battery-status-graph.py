@@ -108,5 +108,13 @@ def render_graph():
 if __name__ == "__main__":
     logging.basicConfig(format='%(message)s', level=logging.DEBUG)
     data = parse_csv()
+
+    fit = np.polyfit(data['energy_full'], data['timestamp'], 1)
+    #print "fit: %s" % fit
+
+    fit_fn = np.poly1d(fit)
+    #print "fit_fn: %s" % fit_fn
+    logging.info("this battery will die on: %s" % datetime.datetime.fromtimestamp(fit_fn(0)))
+
     build_graph(data)
     render_graph()
