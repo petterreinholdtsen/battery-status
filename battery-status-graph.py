@@ -46,21 +46,21 @@ def plot():
     # XXX: can't seem to plot all at once...
     #plt.plot(dates, data['energy_now'], '-b', data['energy_full'], '-r')
     # ... but once at a time seems to do the result i am looking for
-    plt.plot(dates, data['energy_full_design'] / data['energy_full_design'],
+    ax.plot(dates, data['energy_full_design'] / data['energy_full_design'],
              linestyle = '-',
              color = 'black',
              label='design')
-    plt.plot(dates, data['energy_now'] / data['energy_full_design'],
+    ax.plot(dates, data['energy_now'] / data['energy_full_design'],
              linestyle = '-',
              color='grey',
              label='current')
-    plt.plot(dates, data['energy_full'] / data['energy_full_design'],
+    ax.plot(dates, data['energy_full'] / data['energy_full_design'],
              linestyle = '-',
              color = 'red',
              label='effective')
 
     # legend and labels
-    plt.legend(loc='lower left')
+    ax.legend(loc='lower left')
     ax.set_xlabel('time')
     ax.set_ylabel('percent')
     ax.set_title('Battery capacity statistics')
@@ -76,7 +76,7 @@ def plot():
     formatter = FuncFormatter(to_percent)
 
     # Set the formatter
-    plt.gca().yaxis.set_major_formatter(formatter)
+    ax.yaxis.set_major_formatter(formatter)
 
     if sys.stdout.isatty():
         print "drawing on tty"
