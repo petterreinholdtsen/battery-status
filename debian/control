@@ -8,7 +8,7 @@ Standards-Version: 3.9.6
 Package: hjemmenett-battery-status
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: gnuplot-qt | gnuplot-x11 | gnuplot
+Recommends: gnuplot-qt | gnuplot-x11 | gnuplot | python-matplotlib
 Description: Collect battery status
  Gather information from the available batteries every 10 minutes,
  then going into and out of hibernation, and when the power is connected

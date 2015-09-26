@@ -32,6 +32,15 @@ def parse_csv_np():
     #                    ('energy_now', 'f')])
     return data
 
+def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energy_now']):
+    import csv
+    log = csv.DictReader(args.logfile)
+    data = []
+    for row in log:
+        l = tuple([ row[f] for f in fields ])
+        data.append(l)
+    return np.array(data, dtype=zip(fields, 'f'*len(fields)))
+
 def to_percent(y, position):
     # Ignore the passed in position. This has the effect of scaling
     # the default tick locations.
@@ -43,8 +52,7 @@ def to_percent(y, position):
     else:
         return s + '%'
 
-def plot():
-    data = parse_csv_np()
+def build_graph(data):
     # create vectorized converter (can take list-like objects as
     # arguments)
     dateconv = np.vectorize(datetime.datetime.fromtimestamp)
@@ -61,6 +69,7 @@ def plot():
              label='design')
     ax.plot(dates, data['energy_now'] / data['energy_full_design'],
              linestyle = '-',
+            linewidth = 0.5,
              color='grey',
              label='current')
     ax.plot(dates, data['energy_full'] / data['energy_full_design'],
@@ -86,11 +95,15 @@ def plot():
 
     # Set the formatter
     ax.yaxis.set_major_formatter(formatter)
-
+    
+def render_graph():
     if sys.stdout.isatty() and args.outfile == sys.stdout:
         print "drawing on tty"
         plt.show()
     else:
         plt.savefig(args.outfile, bbox_inches='tight')
 
-plot()
+if __name__ == "__main__":
+    data = parse_csv()
+    build_graph(data)
+    render_graph()
