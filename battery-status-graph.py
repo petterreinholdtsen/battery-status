@@ -17,6 +17,8 @@ parser.add_argument('logfile', nargs='?', type=argparse.FileType('r'),
 parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'),
                     default=sys.stdout,
                     help='image to write (default to terminal if available, otherwise stdout)')
+parser.add_argument('--death', type=int, default=0,
+                    help='percentage of battery when it is considered dead')
 args = parser.parse_args()
 
 def parse_csv_np():
@@ -114,7 +116,11 @@ if __name__ == "__main__":
 
     fit_fn = np.poly1d(fit)
     #print "fit_fn: %s" % fit_fn
-    logging.info("this battery will die on: %s" % datetime.datetime.fromtimestamp(fit_fn(0)))
+    # actual energy at which the battery is considered dead
+    # we compute the mean design capacity, then take the given percentage out of that
+    death = args.death * np.mean(data['energy_full_design']) / 100
+    logging.info("this battery will die on: %s"
+                 % datetime.datetime.fromtimestamp(fit_fn(death)))
 
     build_graph(data)
     render_graph()
