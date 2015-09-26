@@ -52,8 +52,7 @@ def to_percent(y, position):
     else:
         return s + '%'
 
-def plot():
-    data = parse_csv()
+def build_graph(data):
     # create vectorized converter (can take list-like objects as
     # arguments)
     dateconv = np.vectorize(datetime.datetime.fromtimestamp)
@@ -95,11 +94,15 @@ def plot():
 
     # Set the formatter
     ax.yaxis.set_major_formatter(formatter)
-
+    
+def render_graph():
     if sys.stdout.isatty() and args.outfile == sys.stdout:
         print "drawing on tty"
         plt.show()
     else:
         plt.savefig(args.outfile, bbox_inches='tight')
 
-plot()
+if __name__ == "__main__":
+    data = parse_csv()
+    build_graph(data)
+    render_graph()
