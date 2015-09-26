@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as md
 from matplotlib.ticker import FuncFormatter
 import pylab
+import sys
 import time
 import datetime
 
@@ -60,6 +61,13 @@ def plot():
 
     # Set the formatter
     plt.gca().yaxis.set_major_formatter(formatter)
-    plt.show()
+
+    if sys.stdout.isatty():
+        print "drawing on tty"
+        plt.show()
+    else:
+        image = 'battery-graph.png'
+        print "writing to image %s" % image
+        plt.savefig(image, bbox_inches='tight')
 
 plot()
