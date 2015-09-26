@@ -69,7 +69,7 @@ def plot():
              label='effective')
 
     # legend and labels
-    ax.legend(loc='lower left')
+    ax.legend(loc='upper right')
     ax.set_xlabel('time')
     ax.set_ylabel('percent')
     ax.set_title('Battery capacity statistics')
