@@ -3,7 +3,6 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.dates as md
 from matplotlib.ticker import FuncFormatter
 import pylab
 import sys
