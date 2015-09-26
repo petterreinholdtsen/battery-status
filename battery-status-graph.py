@@ -59,16 +59,17 @@ def plot():
              linestyle = '-',
              color = 'red',
              label='effective')
+
+    # legend and labels
     plt.legend(loc='lower left')
+    ax.set_xlabel('time')
+    ax.set_ylabel('percent')
+    ax.set_title('Battery capacity statistics')
 
     # Tell matplotlib to interpret the x-axis values as dates
     ax.xaxis_date()
     # Make space for and rotate the x-axis tick labels
     fig.autofmt_xdate()
-
-    ax.set_xlabel('time')
-    ax.set_ylabel('percent')
-    ax.set_title('Battery capacity statistics')
 
     # Create the formatter using the function to_percent. This
     # multiplies all the dfault labels by 100, making them all
