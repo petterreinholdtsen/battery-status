@@ -107,20 +107,31 @@ def render_graph():
         logging.info('drawing to file %s', args.outfile)
         plt.savefig(args.outfile, bbox_inches='tight')
 
-if __name__ == "__main__":
-    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
-    data = parse_csv()
-
+def guess_expiry(x, y, zero = 0):
     fit = np.polyfit(data['energy_full'], data['timestamp'], 1)
     #print "fit: %s" % fit
 
     fit_fn = np.poly1d(fit)
     #print "fit_fn: %s" % fit_fn
+    return datetime.datetime.fromtimestamp(fit_fn(zero))
+
+if __name__ == "__main__":
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+    data = parse_csv()
+
+    # XXX: this doesn't work because it counts all charge/discharge
+    # cycles, we'd need to reprocess the CSV to keep only the last
+    # continuous states
+    #death = guess_expiry(data['energy_now'], data['timestamp'])
+    #logging.info("this battery will be depleted in %s, on %s",
+    #             death - datetime.datetime.now(), death)
+
     # actual energy at which the battery is considered dead
     # we compute the mean design capacity, then take the given percentage out of that
-    death = args.death * np.mean(data['energy_full_design']) / 100
-    logging.info("this battery will die on: %s"
-                 % datetime.datetime.fromtimestamp(fit_fn(death)))
+    zero = args.death * np.mean(data['energy_full_design']) / 100
+    death = guess_expiry(data['energy_full'], data['timestamp'], zero)
+    logging.info("this battery will reach end of life (%s%%) in %s, on %s",
+                 args.death, death - datetime.datetime.now(), death)
 
     build_graph(data)
     render_graph()
