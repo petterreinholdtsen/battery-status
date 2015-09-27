@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+import logging
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -16,6 +17,8 @@ parser.add_argument('logfile', nargs='?', type=argparse.FileType('r'),
 parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'),
                     default=sys.stdout,
                     help='image to write (default to terminal if available, otherwise stdout)')
+parser.add_argument('--death', type=int, default=5,
+                    help='percentage of battery when it is considered dead (default: %(default)s)')
 args = parser.parse_args()
 
 def parse_csv_np():
@@ -98,12 +101,37 @@ def build_graph(data):
     
 def render_graph():
     if sys.stdout.isatty() and args.outfile == sys.stdout:
-        print "drawing on tty"
+        logging.info("drawing on tty")
         plt.show()
     else:
+        logging.info('drawing to file %s', args.outfile)
         plt.savefig(args.outfile, bbox_inches='tight')
 
+def guess_expiry(x, y, zero = 0):
+    fit = np.polyfit(data['energy_full'], data['timestamp'], 1)
+    #print "fit: %s" % fit
+
+    fit_fn = np.poly1d(fit)
+    #print "fit_fn: %s" % fit_fn
+    return datetime.datetime.fromtimestamp(fit_fn(zero))
+
 if __name__ == "__main__":
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
     data = parse_csv()
+
+    # XXX: this doesn't work because it counts all charge/discharge
+    # cycles, we'd need to reprocess the CSV to keep only the last
+    # continuous states
+    #death = guess_expiry(data['energy_now'], data['timestamp'])
+    #logging.info("this battery will be depleted in %s, on %s",
+    #             death - datetime.datetime.now(), death)
+
+    # actual energy at which the battery is considered dead
+    # we compute the mean design capacity, then take the given percentage out of that
+    zero = args.death * np.mean(data['energy_full_design']) / 100
+    death = guess_expiry(data['energy_full'], data['timestamp'], zero)
+    logging.info("this battery will reach end of life (%s%%) in %s, on %s",
+                 args.death, death - datetime.datetime.now(), death)
+
     build_graph(data)
     render_graph()
