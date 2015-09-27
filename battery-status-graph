@@ -27,7 +27,7 @@ EOF
     cat <<EOF
 plot "$input" using 1:(100 * \$8 / \$7) \
   smooth unique axis x1y1 title "Battery level %" \
-    with lines linewidth 0.1 linecolor rgb 'grey',"$input" using 1:(100 * \$6 / \$7) \
+    with lines linewidth 0.1 linecolor rgb '#080808',"$input" using 1:(100 * \$6 / \$7) \
   smooth unique axis x1y1 title "Battery full capacity %" \
     with lines linewidth 1 linecolor rgb 'red',"$input" using 1:(100 * \$7 / \$7) \
   smooth unique axis x1y1 title "Battery design capacity %" \
