@@ -2,3 +2,4 @@ battery-status-collect usr/sbin
 battery-status-graph usr/sbin
 pm-utils-sleep.d/20_hjemmenett-battery-status usr/lib/pm-utils/sleep.d
 pm-utils-power.d/20_hjemmenett-battery-status usr/lib/pm-utils/power.d
+systemd-system-sleep/hjemmenett-battery-status lib/systemd/system-sleep
