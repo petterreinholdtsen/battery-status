@@ -30,7 +30,7 @@ log_battery() {
 	    if [ -e $file ] ; then fexist=$file; fi
 	done
 	if [ -e "$fexist" ] ; then
-	    printf "%s," $(cat $fexist)
+	    printf "%s," "$(cat $fexist | sed -s 's/\(.* .*\)/"\1"/' )"
 	else
 	    printf ","
 	fi
