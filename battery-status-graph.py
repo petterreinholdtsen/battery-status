@@ -22,6 +22,7 @@ parser.add_argument('--death', type=int, default=5,
 args = parser.parse_args()
 
 def parse_csv_np():
+    logging.debug('loading CSV file %s with NumPy', args.logfile)
     data = np.genfromtxt(args.logfile,
                          delimiter=',', names=True,
                          filling_values = 0.0)
@@ -37,6 +38,7 @@ def parse_csv_np():
 
 def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energy_now']):
     import csv
+    logging.debug('loading CSV file %s with builtin CSV module', args.logfile)
     log = csv.DictReader(args.logfile)
     data = []
     for row in log:
@@ -56,6 +58,7 @@ def to_percent(y, position):
         return s + '%'
 
 def build_graph(data):
+    logging.debug('building graph')
     # create vectorized converter (can take list-like objects as
     # arguments)
     dateconv = np.vectorize(datetime.datetime.fromtimestamp)
@@ -128,6 +131,7 @@ if __name__ == "__main__":
 
     # actual energy at which the battery is considered dead
     # we compute the mean design capacity, then take the given percentage out of that
+    logging.debug('guessing expiry')
     zero = args.death * np.mean(data['energy_full_design']) / 100
     death = guess_expiry(data['energy_full'], data['timestamp'], zero)
     logging.info("this battery will reach end of life (%s%%) in %s, on %s",
