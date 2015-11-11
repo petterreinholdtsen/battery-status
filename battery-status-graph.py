@@ -36,7 +36,7 @@ def parse_csv_np():
     #                    ('energy_now', 'f')])
     return data
 
-def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energy_now']):
+def parse_csv_builtin(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energy_now']):
     import csv
     logging.debug('loading CSV file %s with builtin CSV module', args.logfile)
     log = csv.DictReader(args.logfile)
@@ -49,6 +49,18 @@ def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energ
         logging.warning('CSV file is corrupt, skipping remaining entries: %s', e)
     logging.debug('building data array')
     return np.array(data, dtype=zip(fields, 'f'*len(fields)))
+
+# the builtin CSV parser above is faster, we went from 8 to 2 seconds
+# on our test data here there are probably other ways of making this
+# even faster, see:
+#
+# http://stackoverflow.com/a/25508739/1174784
+# http://softwarerecs.stackexchange.com/a/7510/506
+#
+# TL;DR: performance is currently fine, it could be improved with
+# Numpy.fromfile(), Numpy.load() or pandas.read_csv() which should
+# apparently all outperform the above code by an order of magnitude
+parse_csv = parse_csv_builtin
 
 def to_percent(y, position):
     # Ignore the passed in position. This has the effect of scaling
