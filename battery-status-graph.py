@@ -41,9 +41,13 @@ def parse_csv(fields = ['timestamp', 'energy_full', 'energy_full_design', 'energ
     logging.debug('loading CSV file %s with builtin CSV module', args.logfile)
     log = csv.DictReader(args.logfile)
     data = []
-    for row in log:
-        l = tuple([ row[f] for f in fields ])
-        data.append(l)
+    try:
+        for row in log:
+            l = tuple([ row[f] for f in fields ])
+            data.append(l)
+    except csv.Error as e:
+        logging.warning('CSV file is corrupt, skipping remaining entries: %s', e)
+    logging.debug('building data array')
     return np.array(data, dtype=zip(fields, 'f'*len(fields)))
 
 def to_percent(y, position):
