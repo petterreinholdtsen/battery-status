@@ -1,9 +1,7 @@
 Battery-status
 ==============
 
-Battery status collector for Debian based systems.
-
-The latest version is available from
-<URL: https://github.com/petterreinholdtsen/battery-status >
+These scripts are now maintained as part of the battery-stats package.  See
+<URL: https://github.com/petterreinholdtsen/battery-stats >
 
  - Petter Reinholdtsen
